@@ -1,4 +1,4 @@
-const headerCont = document.querySelector(".header-container");
+// const headerCont = document.querySelector(".header-container");
 
 function Header(title, date, temp)  {
   // TASK 1
@@ -15,14 +15,17 @@ function Header(title, date, temp)  {
   //
   const head = document.createElement('div')
   head.classList.add('header')
+
   const dat = document.createElement('span')
-  date.classList.add('date')
-  date.textContent = date
+  dat.classList.add('date')
+  dat.textContent = date
+
   const titl = document.createElement('h1')
-  title.textContent = title
+  titl.textContent = title
+
   const tem = document.createElement('span')
-  temp.classList.add('temp')
-  temp.textContent = temp
+  tem.classList.add('temp')
+  tem.textContent = temp
 
   head.appendChild(dat)
   head.appendChild(titl)
@@ -42,11 +45,15 @@ function headerAppender(selector) {
   // It should append the header to the element in the DOM that matches the given selector.
   //
 
-  const head = Header(selector);
+  // const head = Header(selector);
  
-  selector.forEach(head => {
-    headerCont.appendChild(head);
-  });  
+  // selector.forEach(head => {
+  //   headerCont.appendChild(head);
+  // });  
+
+  const headuh = document.querySelector('.header-container')
+
+  headuh.appendChild(Header('THE Times', 'march 6, 2052', '95 the grease'))
 }
 
 export { Header, headerAppender }

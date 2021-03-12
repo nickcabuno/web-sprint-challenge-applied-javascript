@@ -1,4 +1,5 @@
-const tabCont = document.querySelector(".tabs-container")
+// const tabCont = document.querySelector(".tabs-container")
+import axios from 'axios'
 
 function Tabs(topics) {
   // TASK 3
@@ -16,23 +17,25 @@ function Tabs(topics) {
   // </div>
   //
 
+  const topicsCont = document.createElement('div')
   const topic = document.createElement('div')
-  const java = document.createElement('div')
-  const bootstrap = document.createElement('div')
-  const technology = document.createElement('div')
+  // const bootstrap = document.createElement('div')
+  // const technology = document.createElement('div')
   
-  topic.classList.add('topics');
-  java.classList.add('tab');
-  bootstrap.classList.add('tab');
-  technology.classList.add('tab');
+  topicsCont.classList.add('topics');
+  topic.classList.add('tab');
+  // bootstrap.classList.add('tab');
+  // technology.classList.add('tab');
 
-  java.textContent = res.topics[0]
-  bootstrap.textContent = res.topics[1]
-  technology.textContent = res.topics[2]
+  topic.textContent = `${topics}`
+  // bootstrap.textContent = `${topics}`
+  // technology.textContent = `${topics}`
 
-  topic.appendChild(java)
-  topic.appendChild(bootstrap)
-  topic.appendChild(technology)
+  topicsCont.appendChild(topic)
+  // topic.appendChild(bootstrap)
+  // topic.appendChild(technology)
+
+  return topicsCont
 }
 
 function tabsAppender(selector) {
@@ -44,18 +47,19 @@ function tabsAppender(selector) {
   // Append the tabs to the element in the DOM that matches the selector passed to the function.
   //
 
+  const tabCont = document.querySelector('.tabs-container')
+
   axios.get(`https://lambda-times-api.herokuapp.com/topics`)
-  .then((response) => {
-    const topique = response.topics;
+  .then(res => {
+    const topique = res.data.topics;
 
     topique.forEach((element) => {
-      const topic = Tabs({topics: element});
-      tabCont.append(topic);
+      tabCont.append(Tabs(element));
     });
 
   })
   .catch(( err ) => {
-    console.log( err, "this is the error");
+    console.log( err, "errrrror error");
   })
 
 }

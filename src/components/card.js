@@ -1,5 +1,5 @@
-const cardCont = document.querySelector(".card-container")
-
+// const cardCont = document.querySelector(".card-container")
+import axios from 'axios'
 
 function Card(article) {
   // TASK 5
@@ -23,22 +23,28 @@ function Card(article) {
 
   const cardd = document.createElement('div')
   cardd.classList.add('card')
+
   const headlin = document.createElement('div')
-  headlin.textContent = `${headline}`
+  headlin.textContent = `${article.headline}`
   headlin.classList.add('headline')
+
+
   const author = document.createElement('div')
   author.classList.add('author')
+
   const imgContainer = document.createElement('div')
   imgContainer.classList.add('img-container')
+
   const authorPhot = document.createElement('img')
-  authorPhot.scr = `${authorPhoto}`
+  authorPhot.src = `${article.authorPhoto}`
+
   const authorNam = document.createElement('span')
-  authorNam.textContent = `By ${authorName}`
+  authorNam.textContent = `By ${article.authorName}`
 
   cardd.appendChild(headlin)
   cardd.appendChild(author)
   author.appendChild(imgContainer)
-  author.appendChild(authorPhot)
+  imgContainer.appendChild(authorPhot)
   author.appendChild(authorNam)
 
   return cardd
@@ -54,15 +60,34 @@ function cardAppender(selector) {
   // Append each card to the element in the DOM that matches the selector passed to the function.
   //
 
-  axios.get(`https://lambda-times-api.herokuapp.com/articles`)
-  .then((response) => {
-    const articles = response.data.articles;
+  const cardCont = document.querySelector(".cards-container")
 
-    articles.forEach((article) => {
-      const cardd = Card({article});
-      cardCont.append(cardd);
+  axios.get(`https://lambda-times-api.herokuapp.com/articles`)
+  .then(res => {
+    const javaData = res.data.articles.javascript;
+    javaData.map((element) => {
+      cardCont.append(Card(element));
     });
 
+    const techData = res.data.articles.technology;
+    techData.map((element) => {
+      cardCont.append(Card(element));
+    });
+
+    const bootstrapData = res.data.articles.bootstrap;
+    bootstrapData.map((element) => {
+      cardCont.append(Card(element));
+    });
+
+    const jqueryData = res.data.articles.jquery;
+    jqueryData.map((element) => {
+      cardCont.append(Card(element));
+    });
+
+    const nodejsData = res.data.articles.node;
+    nodejsData.map((element) => {
+      cardCont.append(Card(element));
+    });
   })
   .catch((err) => {
     console.log(err, "error");
