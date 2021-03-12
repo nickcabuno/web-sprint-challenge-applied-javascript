@@ -1,4 +1,3 @@
-// const tabCont = document.querySelector(".tabs-container")
 import axios from 'axios'
 
 function Tabs(topics) {
@@ -18,22 +17,14 @@ function Tabs(topics) {
   //
 
   const topicsCont = document.createElement('div')
-  const topic = document.createElement('div')
-  // const bootstrap = document.createElement('div')
-  // const technology = document.createElement('div')
-  
   topicsCont.classList.add('topics');
-  topic.classList.add('tab');
-  // bootstrap.classList.add('tab');
-  // technology.classList.add('tab');
 
-  topic.textContent = `${topics}`
-  // bootstrap.textContent = `${topics}`
-  // technology.textContent = `${topics}`
-
-  topicsCont.appendChild(topic)
-  // topic.appendChild(bootstrap)
-  // topic.appendChild(technology)
+  topics.forEach((topic) => {
+    const tab = document.createElement('div')
+    tab.classList.add('tab');
+    tab.textContent = `${topic}`
+    topicsCont.appendChild(tab)
+  });
 
   return topicsCont
 }
@@ -52,11 +43,8 @@ function tabsAppender(selector) {
   axios.get(`https://lambda-times-api.herokuapp.com/topics`)
   .then(res => {
     const topique = res.data.topics;
-
-    topique.forEach((element) => {
-      tabCont.append(Tabs(element));
-    });
-
+    
+    tabCont.append(Tabs(topique));
   })
   .catch(( err ) => {
     console.log( err, "errrrror error");

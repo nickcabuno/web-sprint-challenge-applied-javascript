@@ -1,4 +1,3 @@
-// const cardCont = document.querySelector(".card-container")
 import axios from 'axios'
 
 function Card(article) {
