@@ -46,7 +46,7 @@ function headerAppender(selector) {
   // It should append the header to the element in the DOM that matches the given selector.
   //
 
-  const headuh = document.querySelector('.header-container')
+  const headuh = document.querySelector(selector)
 
   headuh.append(Header('THE Times', 'march 6, 2052', '95 the grease'))
 }
